@@ -1,38 +1,40 @@
-import java.util.*;
+import java.util.Scanner;
 
 public class Main {
 
-    static void quicksort(int[] a, int left, int right) {
-        if (left >= right) return;
-        int pivot = a[(left + right) / 2];
-        int i = left, j = right;
+    // Generic function name as requested
+    static int f(int[] a, int x) {
+        int l = 0;
+        int r = a.length - 1;
 
-        while (i <= j) {
-            while (a[i] < pivot) i++;
-            while (a[j] > pivot) j--;
-            if (i <= j) {
-                int tmp = a[i];
-                a[i] = a[j];
-                a[j] = tmp;
-                i++; j--;
+        while (l <= r) {
+            int m = l + (r - l) / 2;
+
+            if (a[m] == x) {
+                return m;
+            }
+            if (a[m] < x) {
+                l = m + 1;
+            } else {
+                r = m - 1;
             }
         }
-
-        quicksort(a, left, j);
-        quicksort(a, i, right);
+        return -1;
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+
         int n = sc.nextInt();
         int[] a = new int[n];
 
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < n; i++) {
             a[i] = sc.nextInt();
+        }
 
-        quicksort(a, 0, n - 1);
+        int x = sc.nextInt();
+        int res = f(a, x);
 
-        for (int x : a)
-            System.out.print(x + " ");
+        System.out.println(res);
     }
 }
